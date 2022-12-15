@@ -3,103 +3,91 @@ import datetime
 import pandas as pd
 from pandas import DataFrame
 import sys
+import mysql.connector
 
 
+def fill_reference_data_in_mysqldb(mongo_client,mysql_host,mysql_password):
+    try:
+        mysqldb = mysql.connector.connect(
+            host=mysql_host,
+            user="root",
+            password=mysql_password,
+            database ="lufthansadb"
 
+        )
+        sqlcursor = mysqldb.cursor()
 
-def fill_reference_data_in_mysqldb(mongo_client,mysqldb):
-    sqlcursor = mysqldb.cursor()
+        mongo_db = client["LufthansaDB"]
 
-    mongo_db = client["LufthansaDB"]
+        #fill Countries
+        counties_col = mongo_db["countries"]
+        mongo_cursor = counties_col.find()
+        mongo_cursor_list = list(mongo_cursor)
+        df_countries = DataFrame(mongo_cursor_list)
+        
+        country_codes = df_countries["CountryCode"]
+        country_names = df_countries["Names"]
 
-    #fill Countries
-    counties_col = mongo_db["countries"]
-    mongo_cursor = counties_col.find()
-    mongo_cursor_list = list(mongo_cursor)
-    df_countries = DataFrame(mongo_cursor_list)
-    
-    country_codes = df_countries["CountryCode"]
-    country_names = df_countries["Names"]
+        for country_code,country_name in zip(country_codes,country_names):
+            val = (country_code,country_name.get("Name")[2].get("$"))
+            sql = "INSERT INTO `countries` (code,name) VALUES (%s, %s)"
+            sqlcursor.execute(sql, val)
+            mysqldb.commit()
 
-    for country_code,country_name in zip(country_codes,country_names):
-        val = (country_code,country_name.get("Name")[2].get("$"))
-        sql = "INSERT INTO `countries` (code,name) VALUES (%s, %s)"
-        sqlcursor.execute(sql, val)
-        mysqldb.commit()
+        """============================="""
 
-   
-    sql = "select * from `countries` "
-    sqlcursor.execute(sql)
-    myresult = sqlcursor.fetchall()
+        #fill Cities
+        cities_col = mongo_db["cities"]
+        mongo_cursor = cities_col.find()
+        mongo_cursor_list = list(mongo_cursor)
+        df_cities = DataFrame(mongo_cursor_list)
 
-    for x in myresult:
-        print(x)
+        
+        
+        city_codes = df_cities["CityCode"]
+        city_names = df_cities["Names"]
 
-    """============================="""
+        country_codes = df_cities["CountryCode"]
+        
 
-    #fill Cities
-    cities_col = mongo_db["cities"]
-    mongo_cursor = cities_col.find()
-    mongo_cursor_list = list(mongo_cursor)
-    df_cities = DataFrame(mongo_cursor_list)
+        for city_code,city_name ,country_code in zip(city_codes,city_names,country_codes):
+            val = (city_code,city_name.get("Name").get("$"),country_code)
+            sql = "INSERT INTO `cities` (code,name,country_code) VALUES (%s, %s, %s)"
+            sqlcursor.execute(sql, val)
+            mysqldb.commit()
 
-    
-    
-    city_codes = df_cities["CityCode"]
-    city_names = df_cities["Names"]
+        """============================="""
 
-    country_codes = df_cities["CountryCode"]
-    
-
-    for city_code,city_name ,country_code in zip(city_codes,city_names,country_codes):
-        val = (city_code,city_name.get("Name").get("$"),country_code)
-        sql = "INSERT INTO `cities` (code,name,country_code) VALUES (%s, %s, %s)"
-        sqlcursor.execute(sql, val)
-        mysqldb.commit()
-
-   
-    sql = "select * from `cities` "
-    sqlcursor.execute(sql)
-    myresult = sqlcursor.fetchall()
-
-    for x in myresult:
-        print(x)
-
-
-
-    """============================="""
-
-    #fill Airports
-    airports_col = mongo_db["airports"]
-    mongo_cursor = airports_col.find()
-    mongo_cursor_list = list(mongo_cursor)
-    df_airports = DataFrame(mongo_cursor_list)
-    """print(df_airports)
-    print(df_cities)"""
-    
-    airport_codes = df_airports["AirportCode"]
-    airport_names = df_airports["Names"]
-
-    city_codes = df_airports["CityCode"]
-    country_codes = df_airports["CountryCode"]
-    positions = df_airports["Position"]
-   
-    for airport_code,airport_name ,country_code,city_code,position in zip(airport_codes,airport_names,country_codes,city_codes,positions):
-        latitude = position.get("Coordinate").get("Latitude")
-        longitude = position.get("Coordinate").get("Longitude")
+        #fill Airports
+        airports_col = mongo_db["airports"]
+        mongo_cursor = airports_col.find()
+        mongo_cursor_list = list(mongo_cursor)
+        df_airports = DataFrame(mongo_cursor_list)
       
-        val = (airport_code,airport_name.get("Name").get("$"),country_code,city_code,latitude,longitude)
-        sql = "INSERT INTO `airports` (code,name,country_code,city_code,Latitude,Longitude) VALUES (%s, %s, %s, %s, %s, %s)"
-        sqlcursor.execute(sql, val)
-        mysqldb.commit()
+        
+        airport_codes = df_airports["AirportCode"]
+        airport_names = df_airports["Names"]
 
-   
-    sql = "select * from `airports` "
-    sqlcursor.execute(sql)
-    myresult = sqlcursor.fetchall()
+        city_codes = df_airports["CityCode"]
+        country_codes = df_airports["CountryCode"]
+        positions = df_airports["Position"]
+    
+        for airport_code,airport_name ,country_code,city_code,position in zip(airport_codes,airport_names,country_codes,city_codes,positions):
+            latitude = position.get("Coordinate").get("Latitude")
+            longitude = position.get("Coordinate").get("Longitude")
+        
+            val = (airport_code,airport_name.get("Name").get("$"),country_code,city_code,latitude,longitude)
+            sql = "INSERT INTO `airports` (code,name,country_code,city_code,Latitude,Longitude) VALUES (%s, %s, %s, %s, %s, %s)"
+            sqlcursor.execute(sql, val)
+            mysqldb.commit()
 
-    for x in myresult:
-        print(x)
+    except mysqldb.connector.Error as error:
+        print("Failed insert data: {}".format(error))
+    finally:
+        if mysqldb.is_connected():
+        sqlcursor.close()
+        mysqldb.close()
+        print("MySQL connection is closed")
 
 
 def validate_key(x_dict ,x_key ):
