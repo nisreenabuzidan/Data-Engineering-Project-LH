@@ -216,9 +216,9 @@ services:
   mySqldb:
     image : mysql:latest
     container_name: lufthansa-airLines-sqldb
-    #environment:
-      #- MYSQL_DATABASE=lufthansadb
-      #- MYSQL_ROOT_PASSWORD=root
+    environment:
+      - MYSQL_DATABASE=lufthansadb
+      - MYSQL_ROOT_PASSWORD=root
     hostname: mysql-server
     ports:
       - 3306:3306
