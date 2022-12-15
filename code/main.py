@@ -63,46 +63,32 @@ try:
     mysqldb = mysql.connector.connect(
     host="lufthansa-airLines-sqldb",
     user="root",
-    password=mysql_db_password,
-    database =mysql_db
+    password=mysql_db_password
     )
+    create_mysqldb(mysqldb)
 except:
-    mysqldb = None
-
-print("mysqldb ",mysqldb)
-
-
-if(mysqldb == None):
-    try:
-        mysqldb = mysql.connector.connect(
-        host="lufthansa-airLines-sqldb",
-        user="root",
-        password=mysql_db_password
-        )
-
-        create_mysqldb(mysqldb)
-    except:
-        print("create_mysqldb throws Exception")
+    print("create_mysqldb throws Exception")
 
 
     #fill reference data
-    try:
-        mysqldb = mysql.connector.connect(
+try:
+    mysqldb = mysql.connector.connect(
         host="lufthansa-airLines-sqldb",
         user="root",
         password=mysql_db_password,
         database =mysql_db
-        )
-    except:
-        mysqldb = None
+    )
+        
+except:
+    mysqldb = None
     
-    print("mysqldb_after ",mysqldb)
+print("mysqldb_after ",mysqldb)
 
-    if(mysqldb != None):
-        try:
-            fill_reference_data_in_mysqldb(client,mysqldb)
-            print("fill_reference_data_in_mysqldb is done")
-        except:
-            print("fill_reference_data_in_mysqldb throws Exception")
+if(mysqldb != None):
+    try:
+        fill_reference_data_in_mysqldb(client,mysqldb)
+        print("fill_reference_data_in_mysqldb is done")
+    except:
+        print("fill_reference_data_in_mysqldb throws Exception")
 
     

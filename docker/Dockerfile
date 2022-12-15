@@ -10,7 +10,7 @@ RUN pip install dash
 RUN python3 -m pip install mysql-connector-python
 RUN pip install matplotlib
 RUN pip3 install fastapi uvicorn
-CMD python3 main.py
+#CMD python3 main.py
 
 
 #FROM python:3.7
