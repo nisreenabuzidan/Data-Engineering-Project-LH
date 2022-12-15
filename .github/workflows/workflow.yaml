@@ -2,6 +2,10 @@ name: Shell commands
 on: [push]
 jobs:
   run-shell-command:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest,ubuntu-20.04, ubuntu-18.04]
     steps:
       - name: test API
         run: |
