@@ -1,4 +1,5 @@
-data/
+data/mongo-db
+data/mysql-db
 .vscode/
 logs/
 code/__pycache__/

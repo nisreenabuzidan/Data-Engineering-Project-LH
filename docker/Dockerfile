@@ -1,5 +1,5 @@
 
-FROM debian:latest
+FROM debian:latest 
 WORKDIR /app/
 RUN apt-get update && apt-get install python3-pip -y
 RUN pip3 install requests
