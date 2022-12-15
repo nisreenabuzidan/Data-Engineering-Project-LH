@@ -1,0 +1,2 @@
+#!/bin/bash
+CLIENT_ID=n64t2zjtu69beyj8eth6fkr2 CLIENT_SECRET=CutaFC2cgvgHV4xXBmYh GRANT_TYPE=client_credentials docker-compose up
