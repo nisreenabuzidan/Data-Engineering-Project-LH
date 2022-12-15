@@ -9,6 +9,6 @@ jobs:
     steps:
       - name: test API
         run: |
-          python3 code/api_test.py
+          python3 ../code/api_test.py
 
           
