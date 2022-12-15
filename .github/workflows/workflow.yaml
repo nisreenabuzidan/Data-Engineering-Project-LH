@@ -7,7 +7,7 @@ jobs:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest,ubuntu-20.04, ubuntu-18.04]
     steps:
-      - name: test API
+      - name: test API 
         run: |
           python3 code/api_test.py
           
