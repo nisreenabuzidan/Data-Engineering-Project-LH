@@ -5,12 +5,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [macos-latest, windows-latest, ubuntu-latest,ubuntu-20.04, ubuntu-18.04]
     steps:
-      - name: echo a string
-        run: echo "Hello world"
-      - name: multiline script
+      - name: test API
         run: |
-          python3 -V
-          touch my_file_with_workflow.py
-          ls -l
+          python3 api_test.py
+          
