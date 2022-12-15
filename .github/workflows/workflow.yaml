@@ -1,5 +1,5 @@
 name: Shell commands
-on: [push]
+on: [merge]
 jobs:
   run-shell-command:
     runs-on: ${{ matrix.os }}
