@@ -7,7 +7,7 @@ import mysql.connector
 from get_token import get_access_token
 from fill_data_in_mongoDB import fill_reference_data_from_lufthansa_api
 from fill_data_in_mysqlDB import fill_reference_data_in_mysqldb
-from create_mysqldb import create_mysqldb
+from create_mysql_db import create_mysqldb
 
 airports_list = ["FRA","HAM","LHR","LTN","MAD","CDG","DUS"]
 
@@ -78,7 +78,7 @@ if(mysqldb == None):
         password=mysql_db_password,
         database =mysql_db
         )
-    except
-        return None
+    except:
+        mysqldb = None
     if(mysqldb != None):
         fill_reference_data_in_mysqldb(client,mysqldb)

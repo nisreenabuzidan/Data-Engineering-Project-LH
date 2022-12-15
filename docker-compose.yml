@@ -148,6 +148,14 @@ services:
       - MYSQL_DATABASE=lufthansadb
       - MYSQL_ROOT_PASSWORD=root
 
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://lufthansa-airLines-sqldb:3306/"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+    
+
   api:
     container_name: api
     build: 
@@ -166,7 +174,15 @@ services:
     ports:
       - "8000:8000"
     depends_on:
+      - main
       - mySqldb
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://lufthansa-airLines-sqldb:3306/"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+     
   
   api_test:
     container_name: api_test
@@ -182,6 +198,12 @@ services:
     environment:
       - API_ADDRESS=api
       - API_PORT=8000
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://api:8000/"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
 
   dash:
     container_name: dashboard
@@ -200,6 +222,12 @@ services:
     environment:
       - MYSQL_DATABASE=lufthansadb
       - MYSQL_ROOT_PASSWORD=root
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://lufthansa-airLines-sqldb:3306/"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
 
   mongodb:
     image : mongo:latest
