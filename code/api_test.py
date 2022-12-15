@@ -1,17 +1,6 @@
 import os
 import datetime
 
-"""TEST_AUTHENTICATION = int(os.environ.get('TEST_AUTHENTICATION'))
-TEST_AUTHORIZATION = int(os.environ.get('TEST_AUTHORIZATION'))
-TEST_CONTENT = int(os.environ.get('TEST_CONTENT'))"""
-
-#if (TEST_AUTHENTICATION ==1):
-#import test_api
-
-
-import os
-import requests
-
 # definition of the API address
  
 api_address = os.environ.get("API_ADDRESS")  
