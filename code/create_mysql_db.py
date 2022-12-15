@@ -1,7 +1,7 @@
 
 def create_mysqldb(mydb):
   mycursor = mydb.cursor()
-  mycursor.execute("CREATE DATABASE test")
+  mycursor.execute("CREATE DATABASE lufthansadb")
 
   #create table countries
   sql ='''CREATE TABLE countries (
