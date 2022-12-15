@@ -1,5 +1,8 @@
 
-def create_mysqldb(mydb):
+def create_mysqldb(mysqldb):
+
+  print("mydb ",mysqldb)
+
   mycursor = mydb.cursor()
   mycursor.execute("CREATE DATABASE lufthansadb")
 
@@ -10,6 +13,7 @@ def create_mysqldb(mydb):
   PRIMARY KEY (code)
   )'''
   mycursor.execute(sql)
+  mysqldb.commit()
 
   #create table cities
   sql = '''CREATE TABLE cities (
@@ -20,6 +24,8 @@ def create_mysqldb(mydb):
   FOREIGN KEY (country_code) REFERENCES countries(code)
   )'''
   mycursor.execute(sql)
+  mysqldb.commit()
+
 
   #create table airports
   sql = '''CREATE TABLE airports (
@@ -35,6 +41,7 @@ def create_mysqldb(mydb):
   )'''
 
   mycursor.execute(sql)
+  mysqldb.commit()
 
   #create table aircrafts
   sql = '''CREATE TABLE aircrafts (
@@ -43,8 +50,7 @@ def create_mysqldb(mydb):
   PRIMARY KEY (code)
   )'''
   mycursor.execute(sql)
-
-
+  mysqldb.commit()
 
 
   sql = '''CREATE TABLE flights (
@@ -70,3 +76,4 @@ def create_mysqldb(mydb):
   aircraft_code VARCHAR(50) )'''
 
   mycursor.execute(sql)
+  mysqldb.commit()

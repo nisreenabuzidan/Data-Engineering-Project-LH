@@ -131,7 +131,6 @@ services:
     build:
       context: docker/
       dockerfile: ./Dockerfile
-    command: python3 main.py
     volumes:
       - ./code:/app
       - ./logs:/logs

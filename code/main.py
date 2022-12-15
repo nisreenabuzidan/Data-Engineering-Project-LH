@@ -22,7 +22,7 @@ access_token = access_token_dict.get("access_token")
 token_type = access_token_dict.get("token_type")
 
 headers = {"Authorization":token_type+" "+access_token}
-
+print("headers ",headers)
 mongo_db_username = os.environ.get("MONGO_INITDB_ROOT_USERNAME")
 mongo_db_password = os.environ.get("MONGO_INITDB_ROOT_PASSWORD")
 
@@ -42,8 +42,16 @@ try:
    exist = databases_list.index("LufthansaDB")
 except:
     exist = None
+
+print("databases_list ",databases_list)
+print("exist ",exist)
+
 if(exist == None):
-    fill_reference_data_from_lufthansa_api(client,airports_list = airports_list ,headers = headers)
+    try:
+        fill_reference_data_from_lufthansa_api(client,airports_list = airports_list ,headers = headers)
+        print("fill_reference_data_from_lufthansa_api is done")
+    except:
+        print("fill_reference_data_from_lufthansa_api throws Exception")
 
 
 
@@ -61,13 +69,20 @@ try:
 except:
     mysqldb = None
 
+print("mysqldb ",mysqldb)
+
+
 if(mysqldb == None):
-    mysqldb = mysql.connector.connect(
-    host="lufthansa-airLines-sqldb",
-    user="root",
-    password=mysql_db_password
-    )
-    create_mysqldb(mysqldb)
+    try:
+        mysqldb = mysql.connector.connect(
+        host="lufthansa-airLines-sqldb",
+        user="root",
+        password=mysql_db_password
+        )
+
+        create_mysqldb(mysqldb)
+    except:
+        print("create_mysqldb throws Exception")
 
 
     #fill reference data
@@ -80,5 +95,14 @@ if(mysqldb == None):
         )
     except:
         mysqldb = None
+    
+    print("mysqldb_after ",mysqldb)
+
     if(mysqldb != None):
-        fill_reference_data_in_mysqldb(client,mysqldb)
+        try:
+            fill_reference_data_in_mysqldb(client,mysqldb)
+            print("fill_reference_data_in_mysqldb is done")
+        except:
+            print("fill_reference_data_in_mysqldb throws Exception")
+
+    

@@ -26,7 +26,7 @@ def get_customer_flight_information_between_airports(airports_list=[],departure_
     for origin_airport_code in airports_list:
         for detination_airport_code in airports_list:
             if(origin_airport_code != detination_airport_code):
-                
+                time.sleep(1)
                 json_object = get_customer_flight_information_on_route(origin_airport_code,detination_airport_code,departure_time,headers)
                 if(json_object):
                     result_list.append(json_object)

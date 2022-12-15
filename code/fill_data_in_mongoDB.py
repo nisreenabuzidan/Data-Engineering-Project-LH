@@ -1,6 +1,7 @@
 from pprint import pprint
 import json
 import datetime
+import time
 import pandas as pd
 from pandas import DataFrame
 from get_countries import get_countries
@@ -36,6 +37,7 @@ def fill_reference_data_from_lufthansa_api(client, airports_list = [] , headers 
                 country_code = airport_json["AirportResource"]["Airports"]["Airport"]["CountryCode"]
                 exist = countries_col.find_one(filter = {"CountryCode":country_code})
                 if(exist==None):
+                    time.sleep(1)
                     countries_json = get_countries(country_code =country_code,headers=headers)
                     if(countries_json):
                         country = countries_json["CountryResource"]["Countries"]["Country"]
@@ -45,6 +47,7 @@ def fill_reference_data_from_lufthansa_api(client, airports_list = [] , headers 
                 city_code = airport_json["AirportResource"]["Airports"]["Airport"]["CityCode"]
                 exist = cities_col.find_one({"CityCode":city_code})
                 if(exist==None):
+                    time.sleep(1)
                     cities_json = get_cities(city_code =city_code,headers=headers)
                     if(cities_json):
                         city = cities_json["CityResource"]["Cities"]["City"]
@@ -72,6 +75,7 @@ def fill_customer_flight_information_by_route_from_lufthansa_api(client,airports
                             #get Aircfarts depending on Flight 
                             exist = aircrafts_col.find_one(filter = {"AircraftCode":aircraft_code})   
                             if(exist==None):
+                                time.sleep(2)
                                 aircrafts_json= get_aircrafts(aircraft_code = aircraft_code,headers = headers)
                                 if(aircrafts_json):
                                     aircraft = aircrafts_json["AircraftResource"]["AircraftSummaries"]["AircraftSummary"]
@@ -88,9 +92,6 @@ def fill_customer_flight_information_from_json(client,date):
             file_data = json.load(f)
             col.insert_many(file_data)
 
-        """cursor = col.find()
-        list_cur = list(cursor)
-        df_flights = DataFrame(list_cur)"""
         
                             
 
