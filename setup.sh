@@ -14,9 +14,3 @@ exit
 docker-compose down
 
 CLIENT_ID=n64t2zjtu69beyj8eth6fkr2 CLIENT_SECRET=CutaFC2cgvgHV4xXBmYh GRANT_TYPE=client_credentials docker-compose up 
-
-
-#MYSQL_ROOT_PASSWORD=root MYSQL_DATABASE=lufthansadb docker-compose exec -it mySqldb bash
-MONGO_INITDB_ROOT_USERNAME=root MONGO_INITDB_ROOT_PASSWORD=root docker-compose exec -it mongodb bash
-
-mysql -u root -p 

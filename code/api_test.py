@@ -1,6 +1,6 @@
 import os
 import datetime
-
+import requests
 # definition of the API address
  
 api_address = os.environ.get("API_ADDRESS")  
