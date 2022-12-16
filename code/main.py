@@ -58,7 +58,8 @@ if(exist == None):
 mysql_host="lufthansa-airLines-sqldb"
 mysql_password =os.environ.get("MYSQL_ROOT_PASSWORD")
 
-try: 
+try:
+    print("hi")
     create_mysqldb(mysql_host,mysql_password)
 except:
     print("create_mysqldb throws Exception")

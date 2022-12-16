@@ -3,13 +3,20 @@ docker-compose up -d mongodb
 
 MYSQL_ROOT_PASSWORD=root docker-compose up -d mySqldb
 
-CLIENT_ID=n64t2zjtu69beyj8eth6fkr2 CLIENT_SECRET=CutaFC2cgvgHV4xXBmYh GRANT_TYPE=client_credentials docker-compose up main
+CLIENT_ID=n64t2zjtu69beyj8eth6fkr2 CLIENT_SECRET=CutaFC2cgvgHV4xXBmYh GRANT_TYPE=client_credentials docker-compose up -d main
 
 docker-compose run -it main
 
 CLIENT_ID=n64t2zjtu69beyj8eth6fkr2 CLIENT_SECRET=CutaFC2cgvgHV4xXBmYh GRANT_TYPE=client_credentials python3 main.py
 
+exit
+
 docker-compose down
 
+CLIENT_ID=n64t2zjtu69beyj8eth6fkr2 CLIENT_SECRET=CutaFC2cgvgHV4xXBmYh GRANT_TYPE=client_credentials docker-compose up 
 
-#MYSQL_ROOT_PASSWORD=root MYSQL_DATABASE=lufthansadb docker-compose exec -it mySqldb 
+
+#MYSQL_ROOT_PASSWORD=root MYSQL_DATABASE=lufthansadb docker-compose exec -it mySqldb bash
+MONGO_INITDB_ROOT_USERNAME=root MONGO_INITDB_ROOT_PASSWORD=root docker-compose exec -it mongodb bash
+
+mysql -u root -p 

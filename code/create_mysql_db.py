@@ -24,7 +24,7 @@ def create_mysqldb(host,password):
     mysqldb = mysql.connector.connect(
           host=host,
           user="root",
-          password=password
+          password=password,
           database ="lufthansadb"
       )
     mycursor = mysqldb.cursor()
@@ -56,8 +56,8 @@ def create_mysqldb(host,password):
     name VARCHAR(100) NOT NULL, 
     city_code VARCHAR(50) NOT NULL,
     country_code VARCHAR(50) NOT NULL,
-    Latitude DECIMAL(10,10),
-    Longitude DECIMAL(10,10),
+    Latitude VARCHAR(50),
+    Longitude VARCHAR(50),
     PRIMARY KEY (code),
     FOREIGN KEY (country_code) REFERENCES countries(code),
     FOREIGN KEY (city_code) REFERENCES cities(code)

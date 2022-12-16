@@ -8,32 +8,39 @@ import mysql.connector
 
 def fill_reference_data_in_mysqldb(mongo_client,mysql_host,mysql_password):
     try:
+         
         mysqldb = mysql.connector.connect(
-            host=mysql_host,
-            user="root",
-            password=mysql_password,
-            database ="lufthansadb"
-
+          host=mysql_host,
+          user="root",
+          password=mysql_password,
+          database ="lufthansadb"
         )
         sqlcursor = mysqldb.cursor()
+        
 
-        mongo_db = client["LufthansaDB"]
-
+        mongo_db = mongo_client["LufthansaDB"]
+        
         #fill Countries
         counties_col = mongo_db["countries"]
         mongo_cursor = counties_col.find()
         mongo_cursor_list = list(mongo_cursor)
         df_countries = DataFrame(mongo_cursor_list)
         
+        
         country_codes = df_countries["CountryCode"]
         country_names = df_countries["Names"]
 
         for country_code,country_name in zip(country_codes,country_names):
+            
             val = (country_code,country_name.get("Name")[2].get("$"))
             sql = "INSERT INTO `countries` (code,name) VALUES (%s, %s)"
             sqlcursor.execute(sql, val)
             mysqldb.commit()
 
+        sql = "select * from countries"
+        myresult = sqlcursor.fetchall()
+        for x in myresult:
+            print(x)
         """============================="""
 
         #fill Cities
@@ -56,10 +63,15 @@ def fill_reference_data_in_mysqldb(mongo_client,mysql_host,mysql_password):
             sqlcursor.execute(sql, val)
             mysqldb.commit()
 
+        sql = "select * from cities"
+        myresult = sqlcursor.fetchall()
+        for x in myresult:
+            print(x)
         """============================="""
 
         #fill Airports
         airports_col = mongo_db["airports"]
+        
         mongo_cursor = airports_col.find()
         mongo_cursor_list = list(mongo_cursor)
         df_airports = DataFrame(mongo_cursor_list)
@@ -76,18 +88,26 @@ def fill_reference_data_in_mysqldb(mongo_client,mysql_host,mysql_password):
             latitude = position.get("Coordinate").get("Latitude")
             longitude = position.get("Coordinate").get("Longitude")
         
-            val = (airport_code,airport_name.get("Name").get("$"),country_code,city_code,latitude,longitude)
-            sql = "INSERT INTO `airports` (code,name,country_code,city_code,Latitude,Longitude) VALUES (%s, %s, %s, %s, %s, %s)"
-            sqlcursor.execute(sql, val)
-            mysqldb.commit()
+            try:
+                val = (airport_code,airport_name.get("Name").get("$"),country_code,city_code,latitude,longitude)
+                sql = "INSERT INTO `airports` (code,name,country_code,city_code,Latitude,Longitude) VALUES (%s, %s, %s, %s, %s, %s)"
+                sqlcursor.execute(sql, val)
+                mysqldb.commit()
+            except mysqldb.connector.Error as error:
+                print("Failed insert airports data: {}".format(error), sql)
+        
+        sql = "select * from airports"
+        myresult = sqlcursor.fetchall()
+        for x in myresult:
+            print(x)
 
     except mysqldb.connector.Error as error:
         print("Failed insert data: {}".format(error))
     finally:
         if mysqldb.is_connected():
-        sqlcursor.close()
-        mysqldb.close()
-        print("MySQL connection is closed")
+            sqlcursor.close()
+            mysqldb.close()
+            print("MySQL connection is closed")
 
 
 def validate_key(x_dict ,x_key ):

@@ -146,16 +146,15 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
       - MYSQL_DATABASE=lufthansadb
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root"""
 
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "http://lufthansa-airLines-sqldb:3306/"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-    restart: always
+    # healthcheck:
+    #   test: ["CMD", "curl", "--fail", "http://lufthansa-airLines-sqldb:3306/"]
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 5
+    # restart: always
     
-
   api:
     container_name: api
     build: 
@@ -174,7 +173,6 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - main
       - mySqldb
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://lufthansa-airLines-sqldb:3306/"]
@@ -183,7 +181,6 @@ services:
       retries: 5
     restart: always
      
-  
   api_test:
     container_name: api_test
     build:
