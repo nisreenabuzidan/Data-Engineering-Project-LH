@@ -39,7 +39,7 @@ This Project aims to request data from Lufthansa API, save them localy and then 
 - Airports collection/table used to store data about selected airports 
 - flights collection/table used to store data about flights between selected airports 
 
-    ![The following diagram illustrates the relational DB](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#G1ujek4Qf53r6blsGkDZRGghCTIEXTYTH6)
+    ![The following diagram illustrates the relational DB](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/commit/fa7291b358ee5d515d0b7139d188dbb234f9e416#diff-900b4e5c33b5ca5c6876541982619d23ad46bb2a178b4a29923e32982b7a01dc)
 
 
 ****
