@@ -22,7 +22,6 @@ mydb = mysql.connector.connect(
 df =pd.read_sql('SELECT * FROM flights  ', con=mydb)
 df_airports =pd.read_sql('SELECT * FROM airports  ', con=mydb)
 
-
 def validate_date_format(date_text):
         try:
             return datetime.datetime.strptime(date_text,'%Y-%m-%d %H:%M:%S')
@@ -53,6 +52,7 @@ df_1 = pd.merge(
     left_on="departure_airport_code", right_on="code"
 
 )
+print(df_1)
 df_1.rename(columns = {"name":"Airport Name","latency_at_departure":"minutes"}, inplace = True)
 
 fig1 = px.bar(df_1, x="Airport Name",
