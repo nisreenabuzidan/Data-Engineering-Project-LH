@@ -20,7 +20,7 @@ This Project aims to request data from Lufthansa API, save them localy and then 
 
 >Paris/. Ch.de Gaulle
 ****
-## **Steps Overview**
+## **Process Overview**
 - Register on Lufthansa API and get Client secret and Client ID
 - Generate token to be used to request Lufthansa API 
 - Get refernce data from Lufthansa API and store them localy
@@ -29,7 +29,7 @@ This Project aims to request data from Lufthansa API, save them localy and then 
 - Show some statitics in a Dashboard
 
 ****
-## **Steps in Details**
+## **Process in Detail**
 ### 1.**Used Databases**
 - Mongo DB
 - Mysql DB
@@ -38,6 +38,7 @@ This Project aims to request data from Lufthansa API, save them localy and then 
 - Cities collection/table used to store data about cities of the studies airports
 - Airports collection/table used to store data about selected airports 
 - flights collection/table used to store data about flights between selected airports 
+ The following diagram illustrates the relational DB :
 
     ![The following diagram illustrates the relational DB](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/ERD.svg)
 
@@ -52,7 +53,22 @@ https://api.lufthansa.com/v1/mds-references/cities/FRA
 - Airports :
 https://api.lufthansa.com/v1/mds-references/airports/FRA
 
+then the data are stored in No SQL DB (Mongo DB) and relational DB (Mysql DB) 
+****
 
+### 4.**Daily Process**
+
+Using Airflow a daily process is automated to do the following :
+- generate a new token to be used for requesting Lufthansa API
+- get customer flights info between the different airports from Lufthansa API on the prevoius day using the request (example):
+https://api.lufthansa.com/v1/operations/customerflightinformation/route/FRA/HAM/2022-12-09
+
+- store this data in Json file to be used in the next step
+- parse the stored Json file and store the data in Mongo DB(**Flights** Collection)
+- request Data from Mongo DB and store them in Mysql DB (**Flights** Table)
+
+
+### 5.**Lufthansa Info API**
 
 
 
