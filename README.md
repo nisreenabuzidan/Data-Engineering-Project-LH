@@ -66,10 +66,30 @@ https://api.lufthansa.com/v1/operations/customerflightinformation/route/FRA/HAM/
 - store this data in Json file to be used in the next step
 - parse the stored Json file and store the data in Mongo DB(**Flights** Collection)
 - request Data from Mongo DB and store them in Mysql DB (**Flights** Table)
-
+- the image below is a screenshot of the daily dag
+![The following diagram illustrates the Daily Dag](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/ERD.svg)
 
 ### 5.**Lufthansa Info API**
+Using **fastapi** from **Python** an API with 2 end points is developed :
+- http://.../8000/  : Check if the API is running healthy 
+- http://.../8000//airport_latency_info?FRA
+  > This endpoint accepts one Mandatory parameter which is the airport_code and tow optinal parameters :start_date and end_date
 
+  > This end point returns a Json file containing Airport_code , the number of all flights departing from this airport and the number of delayed flights on the same day
+  
+  > The number of resuls depends on the duration requested from start_date to end_date 
+
+- the image below is a screenshot of the Json response
+![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/ERD.svg)
+
+### 6.**Dashboard**
+Using  **Dash** and **Python Pandas** from **Python** a Dashboard is developed to display the following bar charts : 
+
+- Avergage Latency at Departure in minutes 
+- Avergage Latency at Arrival in minutes
+- Count of flights between airports
+- Number of Delayed/Number of All flights in an airports 
+![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/ERD.svg)
 
 
 
