@@ -144,6 +144,16 @@ This will run the following :
 > Airflow services
 
 
+## **Possible Improvments**
+- Organize the code in better way
+- Allow the airflow to make the initial phase
+- CI/CD 
+- add more details to dashboard
+- To study the latency in more details ,information about aircrafts should be collected .
+- Machine learning model to find the relation between latency and aircraft type .
+
+
+
 
 
 
