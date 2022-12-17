@@ -67,7 +67,7 @@ https://api.lufthansa.com/v1/operations/customerflightinformation/route/FRA/HAM/
 - parse the stored Json file and store the data in Mongo DB(**Flights** Collection)
 - request Data from Mongo DB and store them in Mysql DB (**Flights** Table)
 - the image below is a screenshot of the daily dag
-![The following diagram illustrates the Daily Dag](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/ERD.svg)
+![The following diagram illustrates the Daily Dag](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/airflow-1.jpg)
 
 ### 5.**Lufthansa Info API**
 Using **fastapi** from **Python** an API with 2 end points is developed :
