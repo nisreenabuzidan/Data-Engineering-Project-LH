@@ -108,6 +108,41 @@ Using  **Dash** and **Python Pandas** from **Python** a Dashboard is developed t
 ![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard2.jpg)
 
 ### 8.**Docker and Docker-compose**
+Running the project consists of 2 phases:
+#### 1- Initial phase
+- Run mongo DB service 
+    >docker-compose up -d mongodb 
+- Run mysql DB service 
+    >MYSQL_ROOT_PASSWORD=root docker-compose up -d mySqldb
+- Run main Service which creates databases and fill reference data
+    >CLIENT_ID={LH client ID } CLIENT_SECRET={LH client secret} GRANT_TYPE=client_credentials docker-compose up -d main
+
+    >docker-compose run -it main
+    CLIENT_ID={LH client ID } CLIENT_SECRET={LH client secret} GRANT_TYPE=client_credentials python3 main.py
+
+- After that the docker container should be removed
+    >exit
+
+    >docker-compose down
+
+#### 2- Continuous phase
+Run the docker-compose 
+
+- CLIENT_ID={LH client ID } CLIENT_SECRET={LH client secret} GRANT_TYPE=client_credentials docker-compose up 
+
+This will run the following :
+> Mongo DB service
+
+> Mysql DB service
+
+> api service
+
+> api_test service
+
+> dashboard service
+
+> Airflow services
+
 
 
 
