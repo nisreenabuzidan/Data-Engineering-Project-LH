@@ -91,9 +91,9 @@ Using  **Dash** and **Python Pandas** from **Python** a Dashboard is developed t
 - Avergage Latency at Arrival in minutes
 - Count of flights between airports
 - Number of Delayed/Number of All flights in an airports 
-![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard1.png)
+![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard1.jpg)
 
-![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard2.png)
+![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard2.jpg)
 
 
 
