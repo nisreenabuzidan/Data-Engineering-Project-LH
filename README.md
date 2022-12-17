@@ -5,8 +5,8 @@ This Project aims to request data from Lufthansa API, save them localy and then 
 ****
 
 ## **Case study**
- Some airports are selected to study latency on customer flights between them : on **Departure** and on **Arrival**
-
+ - Some airports are selected to study latency on customer flights between them : on **Departure** and on **Arrival**
+- Study latency in an airport in a time range
 ### **Selected airports**
 >Frankfurt
 
@@ -103,9 +103,9 @@ Using  **Dash** and **Python Pandas** from **Python** a Dashboard is developed t
 - Avergage Latency at Arrival in minutes
 - Count of flights between airports
 - Number of Delayed/Number of All flights in an airports 
-![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard1.jpg)
+    ![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard1.jpg)
 
-![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard2.jpg)
+    ![The following diagram is a screenshot dashboard](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/dashboard2.jpg)
 
 ### 8.**Docker and Docker-compose**
 Running the project consists of 2 phases:
