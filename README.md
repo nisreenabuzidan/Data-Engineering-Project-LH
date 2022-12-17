@@ -84,7 +84,15 @@ Using **fastapi** from **Python** an API with 2 end points is developed :
 
     ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/API-12.jpg)
 
-### 6.**Dashboard**
+### 6.**API Test**i
+Test the different end-points of the API and print the result in a log file **api_test.log**
+The following screenshots are for different case of endpoints test:
+![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/api_test_1.jpg)
+
+    ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/api_test_2.jpg)
+
+
+### 7.**Dashboard**
 Using  **Dash** and **Python Pandas** from **Python** a Dashboard is developed to display the following bar charts : 
 
 - Avergage Latency at Departure in minutes 
