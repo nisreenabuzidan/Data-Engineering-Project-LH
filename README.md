@@ -89,7 +89,7 @@ Test the different end-points of the API and print the result in a log file **ap
 The following screenshots are for different case of endpoints test:
 ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/api_test_1.jpg)
 
-    ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/api_test_2.jpg)
+![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/api_test_1.jpg)
 
 
 ### 7.**Dashboard**
