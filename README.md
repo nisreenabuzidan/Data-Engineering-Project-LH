@@ -80,9 +80,9 @@ Using **fastapi** from **Python** an API with 2 end points is developed :
   > The number of resuls depends on the duration requested from start_date to end_date 
 
 - the image below is a screenshot of the Json response
-    ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/API-1.jpg)
+    ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/API-11.jpg)
 
-    ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/API-2.jpg)
+    ![The following diagram is a screenshot of the Json response](https://github.com/nisreenabuzidan/Data-Engineering-Project-LH/blob/main/images/API-12.jpg)
 
 ### 6.**Dashboard**
 Using  **Dash** and **Python Pandas** from **Python** a Dashboard is developed to display the following bar charts : 
